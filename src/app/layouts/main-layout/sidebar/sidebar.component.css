@@ -1,0 +1,26 @@
+.layout-container {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 10px;
+}
+
+.content {
+  padding: 20px;
+}
+
+/* sidebar.component.scss */
+button.active-link {
+  background-color: #1976d2; /* Primary color */
+  color: white;
+}
+
+button.active-link mat-icon {
+  color: white;
+}

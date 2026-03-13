@@ -1,0 +1,42 @@
+
+
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <div class="sidebar">
+
+      <!-- <h3>Menu</h3> -->
+
+      <button mat-button [routerLink]="['/dashboard']" routerLinkActive='active-link' [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+
+      <button mat-button routerLinkActive='active-link'>
+        <mat-icon>check_box</mat-icon>
+        Taks
+      </button>
+
+      <button mat-button routerLinkActive='active-link'>
+        <mat-icon>calendar_today</mat-icon>
+        Calendar
+      </button>
+
+      <button mat-button routerLinkActive='active-link'>
+        <mat-icon>insert_chart_outlined</mat-icon>
+        Analytics
+      </button>
+
+      <button mat-button routerLinkActive='active-link'>
+        <mat-icon>people</mat-icon>
+        Team
+      </button>
+
+      <button mat-button routerLinkActive='active-link'>
+        <mat-icon>settings</mat-icon>
+        Settings
+      </button>
+    </div>
+  </mat-sidenav>
+
+
+ 
