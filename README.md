@@ -43,7 +43,8 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ```bash
 ng test
 ```
-
+## Live PipeLine Status
+![CI/CD](https://github.com/marizsafwat/task-management-project/actions/workflows/ci.yml/badge.svg)
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
