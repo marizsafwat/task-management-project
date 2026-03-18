@@ -1,0 +1,6 @@
+.dialog-content{
+    display: flex;
+    flex-direction: column;
+    grid: 1%;
+    gap: 1rem;
+}

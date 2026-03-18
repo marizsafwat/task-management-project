@@ -1,0 +1,10 @@
+    <h2 mat-dialog-title>{{data.header}}</h2>
+
+    <mat-dialog-content>
+      <p>{{ data.message }}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close="false" (click)="onClick(false,$event)">Cancel</button>
+      <button mat-button color="warn" [mat-dialog-close]="true" (click)="onClick(true,$event)">{{data.btnLabel}}</button>
+    </mat-dialog-actions>

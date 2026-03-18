@@ -15,6 +15,13 @@ export const routes: Routes = [
       {
         path:'',
         redirectTo:'dashboard',pathMatch:'full'
+      },
+      {
+        path:'tasks',
+        loadComponent:()=>import('./features/tasks/tasks.component').then(m=>m.TasksComponent)
+      },
+      {path:'tasks/:id',
+        loadComponent:()=>import('./features/tasks/tasks.component').then(m=>m.TasksComponent)
       }
     ]
   }

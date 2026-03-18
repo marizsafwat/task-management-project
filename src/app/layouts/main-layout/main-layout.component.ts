@@ -11,4 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class MainLayoutComponent {
 
+  onSearchChanged(event:any){
+    console.log(event)
+  }
 }

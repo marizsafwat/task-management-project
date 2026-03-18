@@ -1,0 +1,30 @@
+<div class="flex items-center justify-between px-6 pt-6 pb-2">
+  <p class="text-sm text-gray-500">
+    Showing <span class="font-semibold text-gray-800">{{ tasks()?.length }}</span> tasks
+  </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+  @for (task of tasks(); track task.id) {
+
+    <mat-card class="rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 flex flex-col justify-between">
+
+      <!-- Task Card Content -->
+      <app-task-card [data]="[task]" class="flex-1"></app-task-card>
+
+      <!-- Actions -->
+      <div class="flex items-center justify-end gap-1 px-4 py-2 border-t border-gray-100">
+        <button mat-icon-button (click)="onEdit(task, $event)"
+          class="text-gray-400 hover:text-blue-500 transition-colors duration-200">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="onDelete(task)"
+          class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+    </mat-card>
+
+  }
+</div>

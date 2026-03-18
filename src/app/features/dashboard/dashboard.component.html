@@ -1,1 +1,88 @@
-<p>dashboard works!</p>
+<div class="px-1">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+    @for (stat of statisticsResponse().statistics; track stat.title) {
+      <app-statistics-card [statistic]="stat"></app-statistics-card>
+    }
+  </div>
+
+  <div
+    class="flex items-center justify-between px-4 py-2 bg-white rounded-xl shadow-sm border border-gray-100 mx-4"
+  >
+    <!-- Left: Status Filters -->
+    <div class="flex items-center gap-1">
+      <button
+        mat-flat-button
+        *ngFor="let status of statusArray"
+        [color]="currentStatus === status ? 'primary' : ''"
+        [class.bg-transparent]="currentStatus !== status"
+        [class.text-gray-600]="currentStatus !== status"
+        class="rounded-lg text-sm"
+        (click)="currentStatus = status"
+      >
+        {{ status }}
+      </button>
+    </div>
+
+    <!-- Right: Priority Filter + New Task -->
+    <div class="flex items-center gap-2">
+      <button
+        mat-stroked-button
+        [matMenuTriggerFor]="priorityMenu"
+        class="rounded-lg text-sm text-gray-600"
+      >
+        Priority
+        <mat-icon class="text-sm">arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #priorityMenu="matMenu">
+        @for (p of priorityArray; track p) {
+          <button mat-menu-item (click)="currentPriority = p">{{ p }}</button>
+        }
+      </mat-menu>
+
+      <app-add-task-btn></app-add-task-btn>
+      <!-- <button mat-flat-button color="primary" class="rounded-lg text-sm" (click)="onAdd()">
+      + New Task
+    </button> -->
+    </div>
+  </div>
+
+  <div>
+    @if (currentStatus == "all") {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+  <app-status-card
+    [data]="getFilteredTasks('todo', currentPriority)"
+    [connectedTo]="['in_progress', 'done']"
+    listId="todo"
+    (taskDropped)="onTaskDropped($event)">
+  </app-status-card>
+  <app-status-card
+    [data]="getFilteredTasks('in_progress', currentPriority)"
+    [connectedTo]="['todo', 'done']"
+    listId="in_progress"
+    (taskDropped)="onTaskDropped($event)">
+  </app-status-card>
+  <app-status-card
+    [data]="getFilteredTasks('done', currentPriority)"
+    [connectedTo]="['todo', 'in_progress']"
+    listId="done"
+    (taskDropped)="onTaskDropped($event)">
+  </app-status-card>
+</div>
+      <!-- <mat-grid-list cols="3">
+    <mat-grid-tile> <app-status-card [data]="getFilteredTasks('todo',currentPriority)"></app-status-card></mat-grid-tile>
+     <mat-grid-tile> <app-status-card [data]="getFilteredTasks('in_progress',currentPriority)"></app-status-card></mat-grid-tile>
+      <mat-grid-tile> <app-status-card [data]="getFilteredTasks('done',currentPriority)"></app-status-card></mat-grid-tile>
+</mat-grid-list> -->
+    } @else {
+      <div class="grid grid-cols-1 p-4">
+        <app-status-card
+          [data]="getFilteredTasks(currentStatus, currentPriority)"
+        ></app-status-card>
+      </div>
+      <!-- <mat-grid-list cols="1">
+      <mat-grid-tile> <app-status-card [data]="getFilteredTasks(currentStatus,currentPriority)"></app-status-card></mat-grid-tile>
+    </mat-grid-list> -->
+    }
+  </div>
+</div>

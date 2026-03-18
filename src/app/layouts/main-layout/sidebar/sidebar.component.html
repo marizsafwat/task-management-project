@@ -1,7 +1,7 @@
 
 
   <!-- Sidebar -->
-  <mat-sidenav #sidenav mode="side" opened>
+  <mat-sidenav #sidenav mode="side" opened class="flex h-screen">
     <div class="sidebar">
 
       <!-- <h3>Menu</h3> -->
@@ -11,7 +11,7 @@
         Dashboard
       </button>
 
-      <button mat-button routerLinkActive='active-link'>
+      <button mat-button [routerLink]="['/tasks']" routerLinkActive='active-link'>
         <mat-icon>check_box</mat-icon>
         Taks
       </button>
@@ -35,6 +35,8 @@
         <mat-icon>settings</mat-icon>
         Settings
       </button>
+
+     <app-add-task-btn mat-button class="w-full"></app-add-task-btn>
     </div>
   </mat-sidenav>
 

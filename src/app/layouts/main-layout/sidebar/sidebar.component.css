@@ -1,5 +1,5 @@
 .layout-container {
-  height: 100vh;
+  height: 100%;
 }
 
 .sidebar {
@@ -8,7 +8,10 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  justify-items: start;
   gap: 10px;
+  height: 100%;
+  background-color: white;
 }
 
 .content {
@@ -23,4 +26,13 @@ button.active-link {
 
 button.active-link mat-icon {
   color: white;
+}
+
+button{
+  display: flex;
+justify-content: start;
+}
+
+:host{
+  background-color: white;
 }

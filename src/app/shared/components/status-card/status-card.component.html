@@ -1,0 +1,18 @@
+<div class="w-full flex-shrink-0 bg-white rounded-lg shadow-md">
+  <div class="flex items-center justify-between px-2 py-3">
+    <h3 class="text-xs font-bold tracking-widest text-gray-600 uppercase">
+      {{ data()?.[0]?.status?.replace('_', ' ') }} 
+    </h3>
+    <span class="bg-gray-200 text-gray-600 text-xs font-semibold rounded-full px-2 py-0.5">
+      {{ data()?.length }}
+    </span>
+  </div>
+  <hr class="border-t border-gray-200"/>
+  <app-task-card
+    [data]="data()"
+    [listId]="listId()"
+    [connectedTo]="connectedTo()"
+    (taskDropped)="taskDropped.emit($event)">
+  </app-task-card>
+
+</div>

@@ -1,5 +1,5 @@
 <!-- main-layout.component.html -->
-<app-navbar></app-navbar>
+<app-navbar (searchChanged)="onSearchChanged($event)"></app-navbar>
 
 <div class="layout-container">
   <app-sidebar></app-sidebar>
