@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from "@angular/material/icon";
-import { Statistic } from '../../interfaces/statistic.interface';
+import { Statistic } from '../../../shared/interfaces/statistic.interface';
 import { NgStyle } from '@angular/common';
 
 @Component({

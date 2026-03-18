@@ -22,6 +22,12 @@ export const routes: Routes = [
       },
       {path:'tasks/:id',
         loadComponent:()=>import('./features/tasks/tasks.component').then(m=>m.TasksComponent)
+      },{
+        path:'analytics',
+        loadComponent:()=>import('./features/analytics/analytics.component').then(m=>m.AnalyticsComponent)
+      },{
+        path:'team',
+        loadComponent:()=>import('./features/team/team.component').then(m=>m.TeamComponent)
       }
     ]
   }

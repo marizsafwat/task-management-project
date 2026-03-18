@@ -52,7 +52,7 @@ constructor(){
     this.debouncedSearchTerm.set(value);
     this.taskService.getTasks().subscribe(res=>{
       //let tasksRes=res.tasks;
-     this.tasks.update(tasks => [...(tasks??[]), ...(res??[])]);
+     this.tasks.set(res??[]);
     })
   }, 300); // 300ms debounce
 
@@ -60,9 +60,16 @@ constructor(){
 });
 }
 
-selectTask(task: Task) {
-  console.log('Selected task:', task);
-  this.taskService.setFilteredTask(task);
-  this.router.navigate(['/tasks', task.id]);
+selectTask(selectedTask: Task) {
+  const current = this.taskService.getFilteredTask();
+  if (current?.id === selectedTask.id) return;
+
+  this.taskService.setFilteredTask(selectedTask);
+  this.router.navigate(['/tasks', selectedTask.id]);
+}
+
+clearSearch(): void {
+  this.searchTerm.set('');
+  //this.taskService.setFilteredTask(null); // Clear the filtered task in the service
 }
 }

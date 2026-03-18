@@ -1,5 +1,5 @@
 import {CommonModule } from '@angular/common';
-import { Component, computed, inject, signal, effect, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, effect, OnInit, OnDestroy } from '@angular/core';
 import { Task } from '../../shared/interfaces/task.interface';
 import { TasksService } from '../../core/services/tasks.service';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { StatusCardComponent } from '../../shared/components/status-card/status-card.component';
 import { TaskCardComponent } from '../../shared/components/task-card/task-card.component';
 import { TaskFormDialogComponent } from '../../shared/components/task-form-dialog/task-form-dialog.component';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -22,7 +21,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent implements OnInit{
+export class TasksComponent implements OnInit,OnDestroy{
 tasks=signal<Task[]|null>(null);
 dialog=inject(MatDialog);
 tasksService=inject(TasksService);
@@ -31,7 +30,11 @@ mode:'single'|'multiple'='single';
 paramMapSignal = toSignal(this.activatedRoute.paramMap);
 sub = new Subscription();
 id = computed(() => this.paramMapSignal()?.get('id'));
-
+statusColors: Record<string, string> = {
+  todo: 'bg-blue-100 text-blue-800',
+  'in-progress': 'bg-yellow-100 text-yellow-800',
+  done: 'bg-green-100 text-green-800'
+};
 constructor(){
 effect(()=>{
 const id = this.id();
@@ -46,30 +49,24 @@ const id = this.id();
 });
 }
   ngOnInit(): void {
-    debugger; 
     this.sub.add(this.tasksService.getTasks().subscribe(res=>{
       this.tasks.set(res);
     }));
   }
 
-loadTask(currentMood:'single'|'multiple'){
-  if(currentMood=='single'){
+loadTask(currentMood: 'single' | 'multiple') {
+  if (currentMood === 'single') {
     this.tasks.set([]);
-    this.tasksService.getFilteredTask().subscribe(res=>{
-    this.tasks.update(tasks=>[...(tasks??[]),res]);
-   })
+    const task = this.tasksService.getFilteredTask();
+    if (task) this.tasks.set([task]);
+  } else {
+    this.tasksService.getTasks().subscribe(res => {
+      this.tasks.set(res);
+    });
   }
-  else{
-     this.tasksService.getTasks().subscribe(res=>{
-         this.tasks.set(res);
-  })
-}}
+}
 
-statusColors: Record<string, string> = {
-  todo: 'bg-blue-100 text-blue-800',
-  'in-progress': 'bg-yellow-100 text-yellow-800',
-  done: 'bg-green-100 text-green-800'
-};
+
 
 onEdit(task: Task,event: MouseEvent) {
     (event.target as HTMLElement).closest('button')?.blur(); 
@@ -119,5 +116,8 @@ onDelete(task: Task) {
       // this.taskService.deleteTask(task.id);
     }
   });
+}
+ngOnDestroy(): void {
+  this.sub.unsubscribe();
 }
 }

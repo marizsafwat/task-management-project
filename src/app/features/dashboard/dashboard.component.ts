@@ -1,8 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { StatisticsCardComponent } from '../../shared/components/statistics-card/statistics-card.component';
+import { StatisticsCardComponent } from './statistics-card/statistics-card.component';
 import {MatButtonToggleChange, MatButtonToggleModule} from '@angular/material/button-toggle';
-import { StatusCardComponent } from "../../shared/components/status-card/status-card.component";
+import { StatusCardComponent } from "./status-card/status-card.component";
 import { StatisticsService } from '../../core/services/statistics.service';
 import { StatisticsResponse } from '../../shared/interfaces/statistics-response.interface';
 import { TasksService } from '../../core/services/tasks.service';
@@ -26,7 +26,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit,OnDestroy{
+
 
   statisticsService=inject(StatisticsService);
   statisticsResponse=signal<StatisticsResponse>({
@@ -103,4 +104,8 @@ statusArray: ('all' | TaskStatus)[] = [
     this.tasks.set(updatedTasks);
   });
 }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

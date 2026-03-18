@@ -1,0 +1,25 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4">
+
+  <!-- Priority Chart -->
+  <mat-card class="rounded-2xl shadow-sm border border-gray-100 p-4">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-sm font-bold text-gray-700">Tasks by Priority</h3>
+      <span class="text-xs text-gray-400">{{ tasks().length }} total</span>
+    </div>
+    <div class="relative h-64 flex items-center justify-center">
+      <canvas #priorityChart></canvas>
+    </div>
+  </mat-card>
+
+  <!-- Status Chart -->
+  <mat-card class="rounded-2xl shadow-sm border border-gray-100 p-4">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-sm font-bold text-gray-700">Tasks by Status</h3>
+      <span class="text-xs text-gray-400">{{ tasks().length }} total</span>
+    </div>
+    <div class="relative h-64">
+      <canvas #statusChart></canvas>
+    </div>
+  </mat-card>
+
+</div>

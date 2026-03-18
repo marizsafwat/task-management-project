@@ -44,8 +44,8 @@
 
     <mat-form-field  class="w-full">
       <mat-label>Assignee</mat-label>
-      <mat-select formControlName="assignee">
-        @for (s of assigneList(); track s) {
+      <mat-select formControlName="assignee" [compareWith]="compareAssignee">
+        @for (s of assigneList(); track s.id) {
           <mat-option [value]="s">{{s.name}}</mat-option>
         }
       </mat-select>

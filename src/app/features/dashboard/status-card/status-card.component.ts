@@ -1,9 +1,9 @@
 import { Component, input, output, signal } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
-import { Task } from '../../interfaces/task.interface';
+import { Task } from '../../../shared/interfaces/task.interface';
 import { DatePipe, NgClass, NgFor } from '@angular/common';
-import { TaskCardComponent } from '../task-card/task-card.component';
-import { TaskStatus } from '../../types/task-status.type';
+import { TaskCardComponent } from '../../../shared/components/task-card/task-card.component';
+import { TaskStatus } from '../../../shared/types/task-status.type';
 
 @Component({
   selector: 'app-status-card',

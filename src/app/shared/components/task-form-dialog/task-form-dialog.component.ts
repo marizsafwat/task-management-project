@@ -79,6 +79,7 @@ export class TaskFormDialogComponent implements OnInit {
 
     effect(() => {
       this.tasksService.getAssigneesFromTasks().subscribe((assignees) => {
+        debugger;
         this.assigneList.set(assignees);
       });
     });
@@ -104,7 +105,9 @@ export class TaskFormDialogComponent implements OnInit {
     }
   }
 
-
+compareAssignee(a: Assignee, b: Assignee): boolean {
+  return a?.id === b?.id;
+}
 confirmClose(): void {
   if (!this.taskForm.dirty) {
     this.dialogRef.close();
