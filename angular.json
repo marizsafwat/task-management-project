@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/task-management-project/",
             "outputPath": "dist/task-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
