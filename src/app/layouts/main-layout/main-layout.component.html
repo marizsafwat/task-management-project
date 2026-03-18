@@ -1,4 +1,11 @@
-<!-- main-layout.component.html -->
+@if (loadingService.isLoading()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
+    <div class="bg-white rounded-2xl shadow-xl p-6 flex items-center gap-3">
+      <mat-spinner diameter="32"></mat-spinner>
+      <span class="text-sm text-gray-600 font-medium">Loading...</span>
+    </div>
+  </div>
+}
 <app-navbar (searchChanged)="onSearchChanged($event)"></app-navbar>
 
 <div class="layout-container">
